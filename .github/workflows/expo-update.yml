@@ -28,4 +28,3 @@ jobs:
       - name: 🔄 Odeslání aktualizace do Expa
         run: npx expo publish
 
-
