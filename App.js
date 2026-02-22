@@ -1,0 +1,68 @@
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity, SafeAreaView, FlatList } from 'react-native';
+
+// Ukázková data pro tvé budoucí kartičky
+const INITIAL_CARDS = [
+  { id: '1', title: 'Chci pít', icon: '💧' },
+    { id: '2', title: 'Mám hlad', icon: '🍎' },
+      { id: '3', title: 'Toaleta', icon: '🚻' },
+        { id: '4', title: 'Odpočinek', icon: '🛋️' },
+        ];
+
+        export default function App() {
+          const [activeTab, setActiveTab] = useState('cards');
+
+            return (
+                <SafeAreaView style={styles.container}>
+                      {/* Záhlaví s novým jménem */}
+                            <View style={styles.header}>
+                                    <Text style={styles.headerTitle}>PIKTOS</Text>
+                                            <Text style={styles.headerSubtitle}>Studio Synthesis</Text>
+                                                  </View>
+
+                                                        <View style={styles.content}>
+                                                                {activeTab === 'cards' ? (
+                                                                          <FlatList
+                                                                                      data={INITIAL_CARDS}
+                                                                                                  numColumns={2}
+                                                                                                              keyExtractor={(item) => item.id}
+                                                                                                                          renderItem={({ item }) => (
+                                                                                                                                        <TouchableOpacity style={styles.card}>
+                                                                                                                                                        <Text style={styles.cardIcon}>{item.icon}</Text>
+                                                                                                                                                                        <Text style={styles.cardTitle}>{item.title}</Text>
+                                                                                                                                                                                      </TouchableOpacity>
+                                                                                                                                                                                                  )}
+                                                                                                                                                                                                            />
+                                                                                                                                                                                                                    ) : (
+                                                                                                                                                                                                                              <View style={styles.placeholder}><Text>Sekce ve vývoji...</Text></View>
+                                                                                                                                                                                                                                      )}
+                                                                                                                                                                                                                                            </View>
+
+                                                                                                                                                                                                                                                  {/* Spodní navigace */}
+                                                                                                                                                                                                                                                        <View style={styles.navBar}>
+                                                                                                                                                                                                                                                                <TouchableOpacity onPress={() => setActiveTab('cards')} style={styles.navItem}>
+                                                                                                                                                                                                                                                                          <Text style={[styles.navText, activeTab === 'cards' && styles.activeNav]}>🗂️ Karty</Text>
+                                                                                                                                                                                                                                                                                  </TouchableOpacity>
+                                                                                                                                                                                                                                                                                          <TouchableOpacity onPress={() => setActiveTab('sos')} style={styles.navItem}>
+                                                                                                                                                                                                                                                                                                    <Text style={[styles.navText, activeTab === 'sos' && styles.activeNav]}>🆘 SOS</Text>
+                                                                                                                                                                                                                                                                                                            </TouchableOpacity>
+                                                                                                                                                                                                                                                                                                                  </View>
+                                                                                                                                                                                                                                                                                                                      </SafeAreaView>
+                                                                                                                                                                                                                                                                                                                        );
+                                                                                                                                                                                                                                                                                                                        }
+
+                                                                                                                                                                                                                                                                                                                        const styles = StyleSheet.create({
+                                                                                                                                                                                                                                                                                                                          container: { flex: 1, backgroundColor: '#F7F9F4' },
+                                                                                                                                                                                                                                                                                                                            header: { padding: 20, alignItems: 'center', borderBottomWidth: 1, borderBottomColor: '#E0E0E0' },
+                                                                                                                                                                                                                                                                                                                              headerTitle: { fontSize: 28, fontWeight: 'bold', color: '#6B705C', letterSpacing: 2 },
+                                                                                                                                                                                                                                                                                                                                headerSubtitle: { fontSize: 12, color: '#A3A3A3', textTransform: 'uppercase' },
+                                                                                                                                                                                                                                                                                                                                  content: { flex: 1, padding: 10 },
+                                                                                                                                                                                                                                                                                                                                    card: { flex: 1, backgroundColor: '#FFF', margin: 10, padding: 20, borderRadius: 20, alignItems: 'center', elevation: 4, shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.1, shadowRadius: 4 },
+                                                                                                                                                                                                                                                                                                                                      cardIcon: { fontSize: 40, marginBottom: 10 },
+                                                                                                                                                                                                                                                                                                                                        cardTitle: { fontWeight: '600', color: '#333' },
+                                                                                                                                                                                                                                                                                                                                          navBar: { flexDirection: 'row', height: 70, backgroundColor: '#FFF', borderTopWidth: 1, borderTopColor: '#E0E0E0', justifyContent: 'space-around', alignItems: 'center' },
+                                                                                                                                                                                                                                                                                                                                            navText: { fontSize: 16, color: '#A3A3A3' },
+                                                                                                                                                                                                                                                                                                                                              activeNav: { color: '#6B705C', fontWeight: 'bold' },
+                                                                                                                                                                                                                                                                                                                                                placeholder: { flex: 1, justifyContent: 'center', alignItems: 'center' }
+                                                                                                                                                                                                                                                                                                                                                });
+                                                                                                                                                                                                                                                                                                                                                
